@@ -17,7 +17,6 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
-# define KEY_
 
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
@@ -51,7 +50,7 @@ typedef struct s_img
 {
     void	*img;
     char	*addr;
-    int		bpp;
+    int		pixel_bits;
     int		line_len;
     int		endian;
 }	t_img;
@@ -76,17 +75,6 @@ typedef struct s_color
     int             f_valid;
 }	t_color;
 
-typedef struct s_render
-{
-    double      side_dist;
-    double      pos;
-    double      step;
-    int         text_idx;
-    int         text_x;
-    int         text_y;
-    int         color;
-}  t_render;
-
 typedef struct s_game
 {
     void        *mlx;
@@ -102,6 +90,18 @@ typedef struct s_game
     t_img       texture[4];
     t_color     *color;
 }  t_game;
+
+
+typedef struct s_render
+{
+    double      side_dist;
+    double      pos;
+    double      step;
+    int         text_idx;
+    int         text_x;
+    int         text_y;
+    int         color;
+}  t_render;
 
 typedef struct s_ray
 {
