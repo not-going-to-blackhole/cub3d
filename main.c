@@ -65,7 +65,7 @@ static void	init_game_tmp(t_game *game, char *file)
 	while (i < game->map_height)
 	{
 		line = get_next_line(game->file_fd);
-		printf("%s\n", line);
+		//printf("%s", line);
 		game->map_2d[i] = line;
 		i++;
 	}
