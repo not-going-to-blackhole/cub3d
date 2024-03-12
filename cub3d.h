@@ -23,6 +23,7 @@
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
+# define TILE_SIZE 64
 
 # define WALL_HORIZ 0
 # define WALL_VERT 1
@@ -49,7 +50,8 @@ typedef enum e_arrow
 typedef struct s_img
 {
     void	*img;
-    char	*addr;
+    char    *path;
+    int     *data;
     int		pixel_bits;
     int		line_len;
     int		endian;
@@ -94,7 +96,7 @@ typedef struct s_game
 
 typedef struct s_render
 {
-    double      side_dist;
+    double      wall_x;
     double      pos;
     double      step;
     int         text_idx;
@@ -108,10 +110,10 @@ typedef struct s_ray
     double    cam_x;
     double    ray_dir_x;
     double    ray_dir_y;
-    double    side_dist_x;
-    double    side_dist_y;
     double    delta_dist_x;
     double    delta_dist_y;
+    double    side_dist_x;
+    double    side_dist_y;
     double    perp_wall_dist;
     int       hit;
     int       hit_x;
@@ -120,9 +122,12 @@ typedef struct s_ray
     int       step_y;
     int       side;
     int       wall_height;
-    int       draw_start;
-    int       draw_end;
+    int       wall_start;
+    int       wall_end;
 }	t_ray;
 
+int	key_press(int key, t_game *game);
+int	exit_game(t_game *game);
+void    do_render(t_game *game);
 
 #endif

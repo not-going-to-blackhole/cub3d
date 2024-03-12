@@ -73,15 +73,18 @@ void	turn_right(t_game *game)
 	game->player->pln_y = prev_pln_x * sin(-ROT_SPEED) + game->player->pln_y * cos(-ROT_SPEED);
 }
 
+int	exit_game(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
+}
+
 
 int	key_press(int key, t_game *game)
 {
 	if (key == KEY_ESC)
-	{
-		mlx_destroy_window(game->mlx, game->win);
-		exit(0);
-	}
-	if (key == KEY_W)
+		exit_game(game);
+	else if (key == KEY_W)
 		move_forward(game);
 	else if (key == KEY_A)
 		move_left(game);
@@ -95,7 +98,7 @@ int	key_press(int key, t_game *game)
 		turn_right(game);
 	else
 		return (0);
-	
+	do_render(game);
 	return (0);
 }
 
