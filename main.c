@@ -1,25 +1,25 @@
 #include "cub3d.h"
 
-static int	set_player(t_game *game, int x, int y)
+static int	set_player(t_game *game, int i, int j)
 {
-	game->player->pos_x = x + 0.5;
-	game->player->pos_y = y + 0.5;
-	if (game->map_2d[y][x] == 'N')
+	game->player->pos_x = i + 0.5;
+	game->player->pos_y = j + 0.5;
+	if (game->map_2d[i][j] == 'N')
 	{
 		game->player->dir_x = -1;
 		game->player->pln_y = 0.66;
 	}
-	else if (game->map_2d[y][x] == 'S')
+	else if (game->map_2d[i][j] == 'S')
 	{
 		game->player->dir_x = 1;
 		game->player->pln_y = -0.66;
 	}
-	else if (game->map_2d[y][x] == 'W')
+	else if (game->map_2d[i][j] == 'W')
 	{
 		game->player->dir_y = -1;
 		game->player->pln_x = -0.66;
 	}
-	else if (game->map_2d[y][x] == 'E')
+	else if (game->map_2d[i][j] == 'E')
 	{
 		game->player->dir_y = 1;
 		game->player->pln_x = 0.66;
@@ -31,24 +31,24 @@ static int	set_player(t_game *game, int x, int y)
 
 static void	init_player(t_game *game)
 {
-	int	x;
-	int	y;
+	int	i;
+	int	j;
 
 	game->player->pln_x = 0;
 	game->player->pln_y = 0;
 	game->player->dir_x = 0;
 	game->player->dir_y = 0;
-	y = 0;
-	while (game->map_2d[y])
+	i = 0;
+	while (game->map_2d[i])
 	{
-		x = 0;
-		while (game->map_2d[y][x])
+		j = 0;
+		while (game->map_2d[i][j])
 		{
-			if (set_player(game, x, y) == 1)
+			if (set_player(game, i, j) == 1)
 				return ;
-			x++;
+			j++;
 		}
-		y++;
+		i++;
 	}
 }
 
@@ -59,13 +59,17 @@ static void	init_game_tmp(t_game *game, char *file)
 	game->file_fd = open(file, O_RDONLY);
 	game->map = NULL;
 	game->map_height = 5;
-	game->map_2d = (char **)malloc(sizeof(char *) * game->map_height);
+	game->map_2d = (char **)malloc(sizeof(char *) * (game->map_height + 1));
 	int i = 0;
+	char *line;
 	while (i < game->map_height)
 	{
-		game->map_2d[i] = get_next_line(game->file_fd);
+		line = get_next_line(game->file_fd);
+		printf("%s\n", line);
+		game->map_2d[i] = line;
 		i++;
 	}
+	game->map_2d[i] = NULL;
 	close(game->file_fd);
 	game->player = (t_player *)malloc(sizeof(t_player));
 	init_player(game);
@@ -126,4 +130,6 @@ int	main(void)
 	mlx_hook(game.win, KEY_EXIT, 0, &exit_game, &game);
 	do_render(&game);
 	mlx_loop(game.mlx);
+
+	return (0);
 }
