@@ -8,7 +8,8 @@ MLX = -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 GNL_SRC = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 
-SRCS = main.c
+SRCS = main.c \
+	hooks.c move.c render.c init_ray.c raycasting.c
 
 ObJS = $(SRCS:.c=.o) $(GNL_SRC:.c=.o)
 

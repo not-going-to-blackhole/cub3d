@@ -1,53 +1,6 @@
 #include "cub3d.h"
 
-//player의 수평 방향으로 이동
-void	move_left(t_game *game)
-{
-	if (game->map_2d[(int)(game->player->pos_x - game->player->pln_x * MOV_SPEED)][(int)(game->player->pos_y)] != '1')
-		game->player->pos_x -= game->player->pln_x * MOV_SPEED;
-	if (game->map_2d[(int)(game->player->pos_x)][(int)(game->player->pos_y - game->player->pln_y * MOV_SPEED)] != '1')
-		game->player->pos_y -= game->player->pln_y * MOV_SPEED;
-}
-
-void	move_right(t_game *game)
-{
-	if (game->map_2d[(int)(game->player->pos_x + game->player->pln_x * MOV_SPEED)][(int)(game->player->pos_y)] != '1')
-		game->player->pos_x += game->player->pln_x * MOV_SPEED;
-	if (game->map_2d[(int)(game->player->pos_x)][(int)(game->player->pos_y + game->player->pln_y * MOV_SPEED)] != '1')
-		game->player->pos_y += game->player->pln_y * MOV_SPEED;
-}
-
-// player가 바라보는 방향으로 이동
-void	move_forward(t_game *game)
-{
-	int next_dir_x;
-	int next_dir_y;
-
-	next_dir_x = game->player->dir_x;
-	next_dir_y = game->player->dir_y;
-	if (game->map_2d[(int)(game->player->pos_x + next_dir_x * MOV_SPEED)][(int)(game->player->pos_y)] != '1')
-		game->player->pos_x += next_dir_x * MOV_SPEED;
-	if (game->map_2d[(int)(game->player->pos_x)][(int)(game->player->pos_y + next_dir_y * MOV_SPEED)] != '1')
-		game->player->pos_y += next_dir_y * MOV_SPEED;
-}
-
-void	move_back(t_game *game)
-{
-	int next_dir_x;
-	int next_dir_y;
-
-	next_dir_x = game->player->dir_x;
-	next_dir_y = game->player->dir_y;
-	next_dir_x *= -1;
-	next_dir_y *= -1;
-	if (game->map_2d[(int)(game->player->pos_x + next_dir_x * MOV_SPEED)][(int)(game->player->pos_y)] != '1')
-		game->player->pos_x += next_dir_x * MOV_SPEED;
-	if (game->map_2d[(int)(game->player->pos_x)][(int)(game->player->pos_y + next_dir_y * MOV_SPEED)] != '1')
-		game->player->pos_y += next_dir_y * MOV_SPEED;
-}
-
-
-void	turn_left(t_game *game)
+static void	turn_left(t_game *game)
 {
 	double	prev_dir_x;
 	double	prev_pln_x;
@@ -60,7 +13,7 @@ void	turn_left(t_game *game)
 	game->player->pln_y = prev_pln_x * sin(ROT_SPEED) + game->player->pln_y * cos(ROT_SPEED);
 }
 
-void	turn_right(t_game *game)
+static void	turn_right(t_game *game)
 {
 	double	prev_dir_x;
 	double	prev_pln_x;

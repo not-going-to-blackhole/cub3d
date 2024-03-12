@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	set_player(t_game *game, int x, int y)
+static int	set_player(t_game *game, int x, int y)
 {
 	game->player->pos_x = x + 0.5;
 	game->player->pos_y = y + 0.5;
@@ -29,7 +29,7 @@ int	set_player(t_game *game, int x, int y)
 	return (1);
 }
 
-void	init_player(t_game *game)
+static void	init_player(t_game *game)
 {
 	int	x;
 	int	y;
@@ -52,7 +52,7 @@ void	init_player(t_game *game)
 	}
 }
 
-void	init_game_tmp(t_game *game, char *file)
+static void	init_game_tmp(t_game *game, char *file)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");

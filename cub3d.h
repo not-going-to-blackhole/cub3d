@@ -126,8 +126,26 @@ typedef struct s_ray
     int       wall_end;
 }	t_ray;
 
+//hooks.c
 int	key_press(int key, t_game *game);
 int	exit_game(t_game *game);
+
+//move.c
+void	move_left(t_game *game);
+void	move_right(t_game *game);
+void	move_forward(t_game *game);
+void	move_back(t_game *game);
+
+//render.c
 void    do_render(t_game *game);
+
+//init_ray.c
+void    init_ray(t_game *game, t_ray *ray, int x);
+
+//raycasting.c
+void    perform_ray(t_game *game, t_ray *ray);
+void    calc_wall(t_game *game, t_ray *ray);
+void    set_texture(t_game *game, t_ray *ray, t_render *render);
+void    paint_wall(t_game *game, t_ray *ray, t_render *render, int x);
 
 #endif
