@@ -17,13 +17,13 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
-# define KEY_
 
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
+# define TILE_SIZE 64
 
 # define WALL_HORIZ 0
 # define WALL_VERT 1
@@ -50,8 +50,9 @@ typedef enum e_arrow
 typedef struct s_img
 {
     void	*img;
-    char	*addr;
-    int		bpp;
+    char    *path;
+    int     *data;
+    int		pixel_bits;
     int		line_len;
     int		endian;
 }	t_img;
@@ -76,17 +77,6 @@ typedef struct s_color
     int             f_valid;
 }	t_color;
 
-typedef struct s_render
-{
-    double      side_dist;
-    double      pos;
-    double      step;
-    int         text_idx;
-    int         text_x;
-    int         text_y;
-    int         color;
-}  t_render;
-
 typedef struct s_game
 {
     void        *mlx;
@@ -103,15 +93,27 @@ typedef struct s_game
     t_color     *color;
 }  t_game;
 
+
+typedef struct s_render
+{
+    double      wall_x;
+    double      pos;
+    double      step;
+    int         text_idx;
+    int         text_x;
+    int         text_y;
+    int         color;
+}  t_render;
+
 typedef struct s_ray
 {
     double    cam_x;
     double    ray_dir_x;
     double    ray_dir_y;
-    double    side_dist_x;
-    double    side_dist_y;
     double    delta_dist_x;
     double    delta_dist_y;
+    double    side_dist_x;
+    double    side_dist_y;
     double    perp_wall_dist;
     int       hit;
     int       hit_x;
@@ -120,9 +122,30 @@ typedef struct s_ray
     int       step_y;
     int       side;
     int       wall_height;
-    int       draw_start;
-    int       draw_end;
+    int       wall_start;
+    int       wall_end;
 }	t_ray;
 
+//hooks.c
+int	key_press(int key, t_game *game);
+int	exit_game(t_game *game);
+
+//move.c
+void	move_left(t_game *game);
+void	move_right(t_game *game);
+void	move_forward(t_game *game);
+void	move_back(t_game *game);
+
+//render.c
+void    do_render(t_game *game);
+
+//init_ray.c
+void    init_ray(t_game *game, t_ray *ray, int x);
+
+//raycasting.c
+void    perform_ray(t_game *game, t_ray *ray);
+void    calc_wall(t_game *game, t_ray *ray);
+void    set_texture(t_game *game, t_ray *ray, t_render *render);
+void    paint_wall(t_game *game, t_ray *ray, t_render *render, int x);
 
 #endif
