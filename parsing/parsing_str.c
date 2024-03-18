@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeeunpar <yeeunpar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 22:31:36 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/18 22:55:42 by yeeunpar         ###   ########.fr       */
+/*   Updated: 2024/03/19 02:35:03 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	**parsing_str(char const *str1, char str2)
 			str1++;
 		if (*str1)
 		{
-			tmp[cnt++] = word_input(str1, str2);
+			tmp[cnt++] = input_word(str1, str2);
 			if (tmp[cnt - 1] == 0)
 				return (all_free(tmp));
 			str1++;

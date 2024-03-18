@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_data.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeeunpar <yeeunpar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 23:53:18 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/19 00:18:00 by yeeunpar         ###   ########.fr       */
+/*   Updated: 2024/03/19 03:06:24 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ static void	check_dir_rgb(char *line, t_game *game, int *cnt)
 	char	**tmp;
 
 	tmp = parsing_str(line, ' ');
+	printf("start check_dir_rgb\n");
+	printf("tmp[0] : %s\ntmp[1]: %s\n", tmp[0], tmp[1]);
 	if (tmp == (void *)0 || tmp[0] == (void *)0)
-		error("Error: Failed to split dir or rgb string\n");
+		print_error("Error: Failed to split dir or rgb string\n");
 	if (line[0] == '\n' && !(line[1]))
 	{
 		all_free(tmp);
@@ -52,16 +54,16 @@ static void	check_dir_rgb(char *line, t_game *game, int *cnt)
 		!(str_ncompare(tmp[0], "EA", 2)))
 		check_direction(line, game, cnt);
 	else
-		error("Error : Invalid dir or rgb\n");
+		print_error("Error : Invalid dir or rgb\n");
 	all_free(tmp);
+	printf("check_dir_rgb\n");
 }
 
 static int	checking_map(char **line, char **map_buf, t_game *game)
 {
 	if (checking_line(*line, counting_str_length(*line), game) == 1)
 	{
-		*map_buf = ft_strjoin(*map_buf, *line, \
-		counting_str_length(*line), counting_str_length(*map_buf));
+		*map_buf = ft_strjoin_gnl(*map_buf, *line);
 		return (0);
 	}
 	else
@@ -99,20 +101,28 @@ void	check_map_data(t_game *game)
     cnt = 0;
 	map_buf = NULL;
 	line = NULL;
+	printf("check_map_data start\n");
+	printf("game->file_fd : %d\n", game->file_fd);
 	while (42)
 	{
 		line = get_next_line(game->file_fd);
+		printf("line : %s\n", line);
 		if (!line)
 			break ;
+		printf("cnt : %d\n", cnt);
 		if (cnt <= 5)
+		{
 			check_dir_rgb(line, game, &cnt);
+			printf("after check_dir_rgb\n");
+		}
 		else
 			if (checking_map(&line, &map_buf, game) == 1)
-				error("Error : Invalid input map\n");
+				print_error("Error : Invalid input map\n");
 		free(line);
 		line = NULL;
 	}
 	close(game->file_fd);
 	game->map = map_buf;
 	free(line);
+	printf("check_map_data\n");
 }

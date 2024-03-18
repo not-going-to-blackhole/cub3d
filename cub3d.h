@@ -162,7 +162,7 @@ void	parse_map_and_read(t_game *game);
 int	    line_counting(char *line);
 
 //str.c
-int	    mini_atoi(char *str);
+int	    set_atoi(char *str);
 int	    str_ncompare(const char *str1, const char *str2, size_t n);
 int	    counting_str_length(char const *str);
 long	check_atoi(char *str);
@@ -189,5 +189,8 @@ void	setting_rgb(char *line, t_game *game, int *cnt);
 //check_map_data.c
 int	    cnting_line_str(char *line);
 void	check_map_data(t_game *game);
+
+//check_direction.c
+void	check_direction(char *line, t_game *game, int *cnt);
 
 #endif

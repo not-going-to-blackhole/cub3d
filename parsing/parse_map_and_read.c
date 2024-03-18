@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_and_read.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeeunpar <yeeunpar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:54:37 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/19 00:18:23 by yeeunpar         ###   ########.fr       */
+/*   Updated: 2024/03/19 02:34:41 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static void	process_dir_and_rgb(char *line, t_game *game, int *cnt)
 {
 	char	**tmp;
 
-	tmp = split_string(line, ' ');
+	tmp = parsing_str(line, ' ');
 	if (tmp == (void *)0 || tmp[0] == (void *)0)
-		error("Error\ndir_rgb_split\n");
+		print_error("Error\ndir_rgb_split\n");
 	if (line[0] == '\n' && !(line[1]))
 	{
 		all_free(tmp);
@@ -61,14 +61,14 @@ static void	process_dir_and_rgb(char *line, t_game *game, int *cnt)
 	}
 	else if (!(str_ncompare(tmp[0], "F", 1)) || \
 		!(str_ncompare(tmp[0], "C", 1)))
-		check_rgb(line, game, cnt);
+		setting_rgb(line, game, cnt);
 	else if (!(str_ncompare(tmp[0], "NO", 2)) || \
 		!(str_ncompare(tmp[0], "SO", 2)) || \
 		!(str_ncompare(tmp[0], "WE", 2)) || \
 		!(str_ncompare(tmp[0], "EA", 2)))
 		check_direction(line, game, cnt);
 	else
-		error("Error : Invalid dir_rgb\n");
+		print_error("Error : Invalid dir_rgb\n");
 	all_free(tmp);
 }
 
@@ -76,8 +76,7 @@ static int	validate_and_append_to_map(char **line, char **map_buf, t_game *game)
 {
 	if (validate_map_line(*line, counting_str_length(*line), game) == 1)
 	{
-		*map_buf = ft_strjoin(*map_buf, *line, \
-		counting_str_length(*line), counting_str_length(*map_buf));
+		*map_buf = ft_strjoin_gnl(*map_buf, *line);
 		return (0);
 	}
 	else
@@ -108,7 +107,7 @@ void	parse_map_and_read(t_game *game)
 			process_dir_and_rgb(line, game, &cnt);
 		else
 			if (validate_and_append_to_map(&line, &map_buf, game) == 1)
-				error("Error : Invalid input map\n");
+				print_error("Error : Invalid input map\n");
 		free(line);
 		line = NULL;
 	}
