@@ -1,5 +1,29 @@
 #include "cub3d.h"
 
+static int	check_av(char *av)
+{
+	int		str;
+	int		tmp_cnt;
+	char	**tmp;
+
+	tmp_cnt = 0;
+	tmp = parsing_str(av, '/');
+	if (!tmp)
+		error("Error : split argv\n");
+	while (tmp[tmp_cnt])
+		tmp_cnt++;
+	tmp_cnt--;
+	str = counting_str_length(tmp[tmp_cnt]);
+	if (str <= 4)
+		return (all_free(tmp), 1);
+	if (!(tmp[tmp_cnt][str - 1] == 'b' && \
+		tmp[tmp_cnt][str - 2] == 'u' \
+		&& tmp[tmp_cnt][str - 3] == 'c' \
+		&& tmp[tmp_cnt][str - 4] == '.'))
+		return (all_free(tmp), 1);
+	return (all_free(tmp), 0);
+}
+
 static int	set_player(t_game *game, int i, int j)
 {
 	game->player->pos_x = i + 0.5;
