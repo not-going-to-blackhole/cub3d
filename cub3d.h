@@ -31,6 +31,9 @@
 # define MOV_SPEED 0.05
 # define ROT_SPEED 0.05
 
+# define SUCCESS 0
+# define FAIL 1
+
 typedef enum e_dir
 {
     NO,
@@ -127,8 +130,8 @@ typedef struct s_ray
 }	t_ray;
 
 //hooks.c
-int	key_press(int key, t_game *game);
-int	exit_game(t_game *game);
+int	    key_press(int key, t_game *game);
+int	    exit_game(t_game *game);
 
 //move.c
 void	move_left(t_game *game);
@@ -147,5 +150,47 @@ void    perform_ray(t_game *game, t_ray *ray);
 void    calc_wall(t_game *game, t_ray *ray);
 void    set_texture(t_game *game, t_ray *ray, t_render *render);
 void    paint_wall(t_game *game, t_ray *ray, t_render *render, int x);
+
+// map_validator.c
+void	map_vaildator(t_game *game);
+
+// map_validator2.c
+void	checking_map2(char **map);
+
+//parse_map_and_read.c
+void	parse_map_and_read(t_game *game);
+int	    line_counting(char *line);
+
+//str.c
+int	    set_atoi(char *str);
+int	    str_ncompare(const char *str1, const char *str2, size_t n);
+int	    counting_str_length(char const *str);
+long	check_atoi(char *str);
+
+//strstr.c
+char	*duplicate_string(const char *str);
+char	*remove_new_line(char *line);
+
+//free.c
+void	print_error(const char *tmp);
+char	**all_free(char **word);
+
+//parsing_str.c
+char	**parsing_str(char const *str1, char str2);
+
+//wall_vaildator.c
+void	checking_wall(char **map);
+int	    check_all_spaces(char *map);
+
+//setting_rgb.c
+void	init_rgb(t_game *game);
+void	setting_rgb(char *line, t_game *game, int *cnt);
+
+//check_map_data.c
+int	    cnting_line_str(char *line);
+void	check_map_data(t_game *game);
+
+//check_direction.c
+void	check_direction(char *line, t_game *game, int *cnt);
 
 #endif
