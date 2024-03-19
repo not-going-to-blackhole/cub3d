@@ -28,13 +28,11 @@ void    calc_wall(t_game *game, t_ray *ray)
         ray->perp_wall_dist = (ray->hit_x - game->player->pos_x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
     else
         ray->perp_wall_dist = (ray->hit_y - game->player->pos_y + (1 - ray->step_y) / 2) / ray->ray_dir_y;
-    // 벽까지의 거리에 따라 높이 계산
     ray->wall_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
-    // 벽을 그리기 위한 시작점과 끝점 계산
-    ray->wall_start = -ray->wall_height / 2 + WIN_HEIGHT / 2;
+    ray->wall_start = (-ray->wall_height / 2) + (WIN_HEIGHT / 2);
     if (ray->wall_start < 0)
         ray->wall_start = 0;
-    ray->wall_end = ray->wall_height / 2 + WIN_HEIGHT / 2;
+    ray->wall_end = (ray->wall_height / 2) + (WIN_HEIGHT / 2);
     if (ray->wall_end >= WIN_HEIGHT)
         ray->wall_end = WIN_HEIGHT - 1;
 }
@@ -42,9 +40,11 @@ void    calc_wall(t_game *game, t_ray *ray)
 void    set_texture(t_game *game, t_ray *ray, t_render *render)
 {
     if (ray->side == WALL_HORIZ)
-        render->wall_x = game->player->pos_y + ray->perp_wall_dist * ray->ray_dir_y;
+        render->wall_x = game->player->pos_y + \
+            ray->perp_wall_dist * ray->ray_dir_y;
     else
-        render->wall_x = game->player->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
+        render->wall_x = game->player->pos_x + \
+            ray->perp_wall_dist * ray->ray_dir_x;
     render->wall_x -= floor(render->wall_x);
     render->text_x = (int)(render->wall_x * (double)TILE_SIZE);
     if (ray->side == WALL_HORIZ && ray->ray_dir_x > 0)

@@ -10,7 +10,6 @@
 # include "./get_next_line/get_next_line.h"
 
 # define KEY_PRESS 2
-# define KEY_RELEASE 3
 # define KEY_EXIT 17
 # define KEY_ESC 53
 # define KEY_W 13
@@ -152,7 +151,7 @@ void    set_texture(t_game *game, t_ray *ray, t_render *render);
 void    paint_wall(t_game *game, t_ray *ray, t_render *render, int x);
 
 // map_validator.c
-void	map_vaildator(t_game *game);
+void	map_validator(t_game *game);
 
 // map_validator2.c
 void	checking_map2(char **map);

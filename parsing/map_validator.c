@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validator.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeeunpar <yeeunpar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 17:00:36 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/18 23:24:11 by yeeunpar         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:30:46 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*check_newlines_error(char	*map)
 	return (tmp);
 }
 
-void	map_vaildator(t_game *game)
+void	map_validator(t_game *game)
 {
 	int		height;
 	char	**map_2d;
@@ -51,11 +51,11 @@ void	map_vaildator(t_game *game)
 	long	location;
 
 	height = 0;
+	if (game->player_cnt >= 2 || game->player_cnt == 0)
+		print_error("Error : player count error\n");
 	location = find_first_newline_index(game->map);
 	copy_map = check_newlines_error(game->map + location);
 	map_2d = parsing_str(copy_map, '\n');
-	if (game->player_cnt >= 2 || game->player_cnt == 0)
-		print_error("Error : player count error\n");
 	if (map_2d == (void *)0)
 		print_error("Error : Map malloc fail\n");
 	checking_map2(map_2d);

@@ -241,7 +241,7 @@ void	check_texture(t_game *game)
 	list[2] = game->texture[WE].path;
 	list[3] = game->texture[EA].path;
 	list[4] = NULL;
-	while (list[++i])
+	while (++i < 4)
 	{
 		j = -1;
 		while (++j < 4)
@@ -260,7 +260,7 @@ void	set_game(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		print_error("Error : mlx init\n");
-	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	if (!game->win)
 		print_error("Error : mlx window\n");
 	game->img->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
@@ -279,14 +279,14 @@ int	main(int ac, char **av)
 		print_error("Error : invalid argument\n");
 	init_game(&game, av[1]);
 	set_game(&game);
+	init_pixel(&game);
 	check_map_data(&game);
 	if (game.map == NULL)
 		print_error("Error : map error\n");
-	map_vaildator(&game);
+	map_validator(&game);
 	check_texture(&game);
 	init_player(&game);
 	init_rgb(&game);
-	init_pixel(&game);
 	mlx_hook(game.win, KEY_PRESS, 0, &key_press, &game);
 	mlx_hook(game.win, KEY_EXIT, 0, &exit_game, &game);
 	do_render(&game);
