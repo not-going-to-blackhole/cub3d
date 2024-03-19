@@ -2,8 +2,6 @@
 
 static void	put_mlx_image(t_game *game, char *path, t_img *img)
 {
-    printf("put_mlx_image start\n");
-    printf("path : %s\n", path);
 	int	width;
 	int	height;
 
@@ -11,12 +9,10 @@ static void	put_mlx_image(t_game *game, char *path, t_img *img)
 	img->img = mlx_xpm_file_to_image(game->mlx, path, &width, &height);
 	if (!img->img)
 		print_error("Error : Impossible put mlx image\n");
-    printf("%d %d\n", width, height);
 	img->data = (int *)mlx_get_data_addr(img->img, &(img->pixel_bits), \
 		&(img->line_len), &(img->endian));
 	if (!img->data)
 		print_error("Error : Impossible put mlx image\n");
-    printf("put_mlx_image end\n");
 }
 
 static void	input_img(int *cnt, t_game *game, char *tmp, int flag)
@@ -24,7 +20,6 @@ static void	input_img(int *cnt, t_game *game, char *tmp, int flag)
 	char	*tmp_copy;
 
 	tmp_copy = duplicate_string(tmp);
-    printf("input_img : tmp_copy - %s\n", tmp_copy);
 	if (flag == NO)
 	{
 		put_mlx_image(game, tmp, &(game->texture[NO]));
@@ -45,15 +40,11 @@ static void	input_img(int *cnt, t_game *game, char *tmp, int flag)
 		put_mlx_image(game, tmp, &(game->texture[WE]));
 		game->texture[WE].path = tmp_copy;
 	}
-    printf("input_img : path - %s\n", game->texture[NO].path);
 	(*cnt)++;
 }
 
 void	choice_direction(int	*cnt, t_game *game, char *new_line, char *tmp)
 {
-    printf("choice_direction start\n");
-    printf("choice_direction : tmp - %s\n", tmp);
-    printf("map path : %s\n", game->texture[NO].path);
 	if (!(str_ncompare(tmp, "NO", counting_str_length(tmp))) && \
 		!(game->texture[NO].path))
 		input_img(cnt, game, new_line, NO);
@@ -91,19 +82,14 @@ void	check_direction(char *line, t_game *game, int *cnt)
     tmp_str = 0;
 	new_line = NULL;
 	tmp = parsing_str(line, ' ');
-    printf("check_dir after parsing\n");
-    printf("check_dir after parsing : s1 - %s s2 - %s\n", tmp[0], tmp[1]);
 	if (!tmp)
 		print_error("Error\ndirection\n");
 	while (tmp[tmp_str])
 		tmp_str++;
-    printf("check_dir after counting %d\n", tmp_str);
 	if (tmp_str == 2)
 	{
 		new_line = remove_new_line(tmp[1]);
-        printf("check_dir after remove_new_line :%s\n", new_line);
 		check_extension_error(new_line);
-        printf("check_dir after check_extension_error\n");
 	}
 	if (tmp_str == 2)
 		choice_direction(cnt, game, new_line, tmp[0]);

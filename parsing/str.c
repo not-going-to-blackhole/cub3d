@@ -6,7 +6,7 @@
 /*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:01:00 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/19 03:03:07 by woorikim         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:03:57 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ long	check_atoi(char *str)
 
 int	str_ncompare(const char *str1, const char *str2, size_t n)
 {
-	printf("after compare str1 - %s & str2 - %s\n", str1, str2);
 	size_t	i;
 
 	i = 0;
