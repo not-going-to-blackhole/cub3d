@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_direction.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/19 16:09:38 by woorikim          #+#    #+#             */
+/*   Updated: 2024/03/19 16:39:42 by woorikim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 static void	put_mlx_image(t_game *game, char *path, t_img *img)
@@ -8,11 +20,13 @@ static void	put_mlx_image(t_game *game, char *path, t_img *img)
 	img->img = NULL;
 	img->img = mlx_xpm_file_to_image(game->mlx, path, &width, &height);
 	if (!img->img)
-		print_error("Error : Impossible put mlx image\n");
+		print_error("Error\nImpossible put mlx image\n");
+	if (width != TILE_SIZE || height != TILE_SIZE)
+		print_error("Error\nInvalid texture size\n");
 	img->data = (int *)mlx_get_data_addr(img->img, &(img->pixel_bits), \
 		&(img->line_len), &(img->endian));
 	if (!img->data)
-		print_error("Error : Impossible put mlx image\n");
+		print_error("Error\nImpossible put mlx image\n");
 }
 
 static void	input_img(int *cnt, t_game *game, char *tmp, int flag)
@@ -58,7 +72,7 @@ void	choice_direction(int	*cnt, t_game *game, char *new_line, char *tmp)
 		&& !(game->texture[EA].path))
 		input_img(cnt, game, new_line, EA);
 	else
-		print_error("Error : Invaild direction\n");
+		print_error("Error\nInvaild direction\n");
 }
 
 static void	check_extension_error(char *file)
@@ -67,23 +81,23 @@ static void	check_extension_error(char *file)
 
 	len = counting_str_length(file);
 	if (len <= 4)
-		print_error("Error : Impossible extension\n");
+		print_error("Error\nImpossible extension\n");
 	if (!(file[len - 1] == 'm' && file[len - 2] == 'p' \
 		&& file[len - 3] == 'x' && file[len - 4] == '.'))
-		print_error("Error : Impossible extension\n");
+		print_error("Error\nImpossible extension\n");
 }
 
 void	check_direction(char *line, t_game *game, int *cnt)
 {
-    int		tmp_str;
+	int		tmp_str;
 	char	**tmp;
 	char	*new_line;
 
-    tmp_str = 0;
+	tmp_str = 0;
 	new_line = NULL;
 	tmp = parsing_str(line, ' ');
 	if (!tmp)
-		print_error("Error\ndirection\n");
+		print_error("Error\nInvalid direction\n");
 	while (tmp[tmp_str])
 		tmp_str++;
 	if (tmp_str == 2)
@@ -94,7 +108,7 @@ void	check_direction(char *line, t_game *game, int *cnt)
 	if (tmp_str == 2)
 		choice_direction(cnt, game, new_line, tmp[0]);
 	else
-		print_error("Error : Invaild direction\n");
+		print_error("Error\nInvaild direction\n");
 	all_free(tmp);
 	free(new_line);
 }

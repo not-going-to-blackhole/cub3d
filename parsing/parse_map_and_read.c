@@ -6,7 +6,7 @@
 /*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:54:37 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/19 02:34:41 by woorikim         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:43:30 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	line_counting(char *line)
 {
 	int	i;
 
-    i = 0;
+	i = 0;
 	if (!line)
 		return (0);
 	while (line[i])
@@ -42,7 +42,7 @@ static int	validate_map_line(char *line, int line_len, t_game *game)
 			line[i] == 'W' || line[i] == 'E')
 			game->player_cnt++;
 		else
-				return (0);
+			return (0);
 	}
 	return (1);
 }
@@ -68,11 +68,11 @@ static void	process_dir_and_rgb(char *line, t_game *game, int *cnt)
 		!(str_ncompare(tmp[0], "EA", 2)))
 		check_direction(line, game, cnt);
 	else
-		print_error("Error : Invalid dir_rgb\n");
+		print_error("Error\nInvalid dir_rgb\n");
 	all_free(tmp);
 }
 
-static int	validate_and_append_to_map(char **line, char **map_buf, t_game *game)
+static int	append_to_map(char **line, char **map_buf, t_game *game)
 {
 	if (validate_map_line(*line, counting_str_length(*line), game) == 1)
 	{
@@ -106,8 +106,8 @@ void	parse_map_and_read(t_game *game)
 		if (cnt <= 5)
 			process_dir_and_rgb(line, game, &cnt);
 		else
-			if (validate_and_append_to_map(&line, &map_buf, game) == 1)
-				print_error("Error : Invalid input map\n");
+			if (append_to_map(&line, &map_buf, game) == 1)
+				print_error("Error\nInvalid input map\n");
 		free(line);
 		line = NULL;
 	}

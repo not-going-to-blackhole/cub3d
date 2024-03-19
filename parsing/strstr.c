@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strstr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeeunpar <yeeunpar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:15:09 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/19 00:18:46 by yeeunpar         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:12:47 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*remove_new_line(char *line)
 	int		i;
 	char	*no_newline;
 
-    i = 0;
+	i = 0;
 	if (!line)
 		return (NULL);
 	no_newline = (char *)malloc(sizeof(char) * (counting_str_length(line) + 1));
