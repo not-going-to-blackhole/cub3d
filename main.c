@@ -178,7 +178,6 @@ void	init_game(t_game *game, char *file)
 	init_text(game);
 	game->color->c_valid = 0;
 	game->color->f_valid = 0;
-	printf("init_game\n");
 }
 
 void	init_pixel(t_game *game)
@@ -279,6 +278,7 @@ int	main(int ac, char **av)
 	if (ac != 2 || check_av(av[1]))
 		print_error("Error : invalid argument\n");
 	init_game(&game, av[1]);
+	set_game(&game);
 	check_map_data(&game);
 	if (game.map == NULL)
 		print_error("Error : map error\n");
@@ -287,9 +287,9 @@ int	main(int ac, char **av)
 	init_player(&game);
 	init_rgb(&game);
 	init_pixel(&game);
-	set_game(&game);
 	mlx_hook(game.win, KEY_PRESS, 0, &key_press, &game);
 	mlx_hook(game.win, KEY_EXIT, 0, &exit_game, &game);
 	do_render(&game);
+	mlx_loop(game.mlx);
 	return (0);
 }
