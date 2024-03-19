@@ -6,7 +6,7 @@
 /*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 23:53:18 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/19 12:26:42 by woorikim         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:40:24 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	check_dir_rgb(char *line, t_game *game, int *cnt)
 
 	tmp = parsing_str(line, ' ');
 	if (tmp == (void *)0 || tmp[0] == (void *)0)
-		print_error("Error: Failed to split dir or rgb string\n");
+		print_error("Error\nFailed to split dir or rgb string\n");
 	if (line[0] == '\n' && !(line[1]))
 	{
 		all_free(tmp);
@@ -52,7 +52,7 @@ static void	check_dir_rgb(char *line, t_game *game, int *cnt)
 		!(str_ncompare(tmp[0], "EA", 2)))
 		check_direction(line, game, cnt);
 	else
-		print_error("Error : Invalid dir or rgb\n");
+		print_error("Error\nInvalid dir or rgb\n");
 	all_free(tmp);
 }
 
@@ -78,7 +78,7 @@ int	cnting_line_str(char *line)
 	int	i;
 
 	i = 0;
-    if (!line)
+	if (!line)
 		return (0);
 	while (line[i])
 	{
@@ -91,11 +91,11 @@ int	cnting_line_str(char *line)
 
 void	check_map_data(t_game *game)
 {
-    int		cnt;
+	int		cnt;
 	char	*map_buf;
 	char	*line;
 
-    cnt = 0;
+	cnt = 0;
 	map_buf = NULL;
 	line = NULL;
 	while (42)
@@ -109,7 +109,7 @@ void	check_map_data(t_game *game)
 		}
 		else
 			if (checking_map(&line, &map_buf, game) == 1)
-				print_error("Error : Invalid input map\n");
+				print_error("Error\nInvalid input map\n");
 		free(line);
 		line = NULL;
 	}

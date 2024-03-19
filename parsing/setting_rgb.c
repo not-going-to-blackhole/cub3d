@@ -6,7 +6,7 @@
 /*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 23:37:41 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/19 02:42:23 by woorikim         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:43:56 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ static void	checking_rgb_invalid(char *tmp)
 	{
 		if (!(tmp[i] == ',' || (tmp[i] >= '0' && tmp[i] <= '9') || \
 			tmp[i] == '\n'))
-			print_error("Error : Invaild rgb\n");
+			print_error("Error\nInvaild rgb\n");
 		i++;
 	}
 }
 
 static void	input_rgb(char *tmp, int *cnt, int *arr, int *check)
 {
-    int		i;
-    int		comma_num;
+	int		i;
+	int		comma_num;
 	char	**comma_split;
 
 	i = 0;
 	comma_num = 0;
-    comma_split = parsing_str(tmp, ',');
+	comma_split = parsing_str(tmp, ',');
 	while (tmp[i])
 	{
 		if (tmp[i] == ',')
@@ -59,10 +59,10 @@ static void	input_rgb(char *tmp, int *cnt, int *arr, int *check)
 		i++;
 	}
 	if (comma_num >= 3)
-		print_error("Error : comma\n");
+		print_error("Error\ncomma\n");
 	checking_rgb_invalid(tmp);
 	if (!comma_split)
-		print_error("Error : Invaild rgb\n");
+		print_error("Error\nInvaild rgb\n");
 	check_color(comma_split, arr);
 	(*cnt)++;
 	all_free(comma_split);
@@ -79,14 +79,14 @@ void	init_rgb(t_game *game)
 
 void	setting_rgb(char *line, t_game *game, int *cnt)
 {
-    int		tmp_str;
+	int		tmp_str;
 	char	**tmp;
 	char	*new_line;
 
 	new_line = NULL;
 	tmp = parsing_str(line, ' ');
 	if (!tmp)
-		print_error("Error : Invaild rgb\n");
+		print_error("Error\nInvaild rgb\n");
 	tmp_str = 0;
 	while (tmp[tmp_str])
 		tmp_str++;
@@ -101,7 +101,7 @@ void	setting_rgb(char *line, t_game *game, int *cnt)
 		input_rgb(new_line, cnt, game->color->c_rgb, \
 		&(game->color->c_valid));
 	else
-		print_error("Error : Invalid rgb\n");
+		print_error("Error\nInvalid rgb\n");
 	all_free(tmp);
 	free(new_line);
 }

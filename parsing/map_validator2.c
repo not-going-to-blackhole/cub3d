@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_vaildator2.c                                   :+:      :+:    :+:   */
+/*   map_validator2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 23:03:29 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/19 01:41:23 by woorikim         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:42:37 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ static void	check_diagonal_valid(char **map, int i, int j)
 	if (map[i - 1] && checking_str(map[i - 1][j]))
 		print_error("Error invalid map\n");
 	else if (map[i - 1] && checking_str(map[i - 1][j - 1]))
-		print_error("Error : invalid map\n");
+		print_error("Error\nInvalid map\n");
 	else if (map[i - 1] && checking_str(map[i - 1][j + 1]))
-		print_error("Error : invalid map\n");
+		print_error("Error\nInvalid map\n");
 	else if (map[i] && checking_str(map[i][j - 1]))
-		print_error("Error : invalid map\n");
+		print_error("Error\nInvalid map\n");
 	else if (map[i] && checking_str(map[i][j + 1]))
-		print_error("Error : invalid map\n");
+		print_error("Error\nInvalid map\n");
 	else if (map[i + 1] && checking_str(map[i + 1][j]))
-		print_error("Error : invalid map\n");
+		print_error("Error\nInvalid map\n");
 	else if (map[i + 1] && checking_str(map[i + 1][j - 1]))
-		print_error("Error : invalid map\n");
+		print_error("Error\nInvalid map\n");
 	else if (map[i + 1] && checking_str(map[i + 1][j + 1]))
-		print_error("Error : invalid map\n");
+		print_error("Error\nInvalid map\n");
 }
 
 void	checking_map2(char **map)

@@ -6,7 +6,7 @@
 /*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 22:31:36 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/19 02:35:03 by woorikim         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:28:37 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	malloc_cnt(char const *str1, char str2)
 	int	i;
 	int	cnt;
 
-    i = 0;
+	i = 0;
 	cnt = 0;
 	while (str1[i] != '\0')
 	{
@@ -44,11 +44,11 @@ static int	malloc_cnt(char const *str1, char str2)
 static char	*input_word(char const *str1, char str2)
 {
 	int		i;
-    int		j;
+	int		j;
 	int		cnt;
-    char	*tmp;
+	char	*tmp;
 
-    i = 0;
+	i = 0;
 	j = 0;
 	cnt = 0;
 	while (str1[i] != '\0' && check_str(str1[i], str2) == 0)
