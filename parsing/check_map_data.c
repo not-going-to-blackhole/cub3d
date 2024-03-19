@@ -6,7 +6,7 @@
 /*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 23:53:18 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/19 16:40:24 by woorikim         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:31:19 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,13 @@ static void	check_dir_rgb(char *line, t_game *game, int *cnt)
 
 static int	checking_map(char **line, char **map_buf, t_game *game)
 {
+	char	*tmp;
+
+	tmp = *map_buf;
 	if (checking_line(*line, counting_str_length(*line), game) == 1)
 	{
-		*map_buf = ft_strjoin_gnl(*map_buf, *line);
+		*map_buf = ft_strjoin_gnl(tmp, *line);
+		free(tmp);
 		return (0);
 	}
 	else
