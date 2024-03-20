@@ -6,7 +6,7 @@
 /*   By: woorikim <woorikim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 17:00:36 by yeeunpar          #+#    #+#             */
-/*   Updated: 2024/03/19 16:42:18 by woorikim         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:01:19 by woorikim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	map_validator(t_game *game)
 
 	height = 0;
 	if (game->player_cnt >= 2 || game->player_cnt == 0)
-		print_error("Error\nplayer count error\n");
+		print_error("Error\nPlayer count error\n");
 	location = find_first_newline_index(game->map);
 	copy_map = check_newlines_error(game->map + location);
 	map_2d = parsing_str(copy_map, '\n');
